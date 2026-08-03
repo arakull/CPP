@@ -1,18 +1,3 @@
-    #include <stdio.h>
-    #include <math.h>
-    int a;
-    int b;
-    int c;
-    int main(void)
-    {
-        printf("Enter the coefficient a before x^2\n");
-        scanf("%d",&a);
-
-        printf("Enter the coefficient b before x\n");
-        scanf("%d",&b);
-
-        printf("Enter the coefficient c\n");
-        scanf("%d",&c);
 #include <stdio.h>
 #include <math.h>
 
