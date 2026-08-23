@@ -734,11 +734,11 @@ false if the input was invalid <pre class="fragment">    The function code looks
 <div class="line">                             <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
 <div class="line">             <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="#a8798cd5a4c4d7ab7a9c140f5920be291a6a2805072f9fed13d0082ed19a42c0e3">e_OneRoot</a>:  <a class="code hl_function" href="#abe47204e50f41e2d2092352c9794c058">PrintfColor</a>            (<span class="stringliteral">&quot;The equation has a unique solution\n&quot;</span>,               TextColor);</div>
-<div class="line">                             <a class="code hl_function" href="#a8e0f219518ae53bd2b6b71256782f896">PrintfColorOneArgument</a>  (<span class="stringliteral">&quot;x = %.3f\n&quot;</span>,  x1,                                     AnswerColor);</div>
+<div class="line">                             <a class="code hl_function" href="#a8e0f219518ae53bd2b6b71256782f896">PrintfColorOneArgument</a>  (<span class="stringliteral">&quot;x = %.3f\n&quot;</span>,  x1,                                    AnswerColor);</div>
 <div class="line">                             <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
 <div class="line">             <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="#a8798cd5a4c4d7ab7a9c140f5920be291aacbc89e279b4f3c5d6e384cd475abbf1">e_TwoRoot</a>:  <a class="code hl_function" href="#a8e0f219518ae53bd2b6b71256782f896">PrintfColorOneArgument</a> (<span class="stringliteral">&quot;x1 = %.3f\n&quot;</span>, x1,                                    AnswerColor);</div>
-<div class="line">                             <a class="code hl_function" href="#a8e0f219518ae53bd2b6b71256782f896">PrintfColorOneArgument</a>  (<span class="stringliteral">&quot;x2 = %.3f\n&quot;</span>, x2,                                     AnswerColor);</div>
+<div class="line">                             <a class="code hl_function" href="#a8e0f219518ae53bd2b6b71256782f896">PrintfColorOneArgument</a>  (<span class="stringliteral">&quot;x2 = %.3f\n&quot;</span>, x2,                                    AnswerColor);</div>
 <div class="line">                             <span class="keywordflow">break</span>;</div>
 <div class="line"> </div>
 <div class="line">             <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="#a8798cd5a4c4d7ab7a9c140f5920be291a38975825108fdfd7bb2c153623e940eb">e_ManyRoot</a>: <a class="code hl_function" href="#abe47204e50f41e2d2092352c9794c058">PrintfColor</a>            (<span class="stringliteral">&quot;The equation has an infinite number of solutions\n&quot;</span>, TextColor);</div>
@@ -785,7 +785,8 @@ false if the input was invalid <pre class="fragment">    The function code looks
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the text file containing the ASCII image </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">Color</td><td>Console color used to display the ASCII image The function code looks like this: <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="#a15642b0a4c1f144146d1e449ccb937b9">PrintASCII</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* FileName, <span class="keywordtype">int</span> Color)</div>
+    <tr><td class="paramdir">[in]</td><td class="paramname">Color</td><td>Console color used to display the ASCII image <pre class="fragment">                 The function code looks like this:
+</pre> <div class="fragment"><div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="#a15642b0a4c1f144146d1e449ccb937b9">PrintASCII</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* FileName, <span class="keywordtype">int</span> Color)</div>
 <div class="line"> {</div>
 <div class="line">     assert(FileName);</div>
 <div class="line"> </div>
@@ -805,7 +806,7 @@ false if the input was invalid <pre class="fragment">    The function code looks
 <div class="line"> </div>
 <div class="line">     fclose (File);</div>
 <div class="line"> }</div>
-<div class="ttc" id="amai_8c_html_a15642b0a4c1f144146d1e449ccb937b9"><div class="ttname"><a href="#a15642b0a4c1f144146d1e449ccb937b9">PrintASCII</a></div><div class="ttdeci">void PrintASCII(const char *FileName, int Color)</div><div class="ttdoc">Displays an ASCII image from a text file in the console.</div><div class="ttdef"><b>Definition</b> mai.c:677</div></div>
+<div class="ttc" id="amai_8c_html_a15642b0a4c1f144146d1e449ccb937b9"><div class="ttname"><a href="#a15642b0a4c1f144146d1e449ccb937b9">PrintASCII</a></div><div class="ttdeci">void PrintASCII(const char *FileName, int Color)</div><div class="ttdoc">Displays an ASCII image from a text file in the console.</div><div class="ttdef"><b>Definition</b> mai.c:678</div></div>
 <div class="ttc" id="amai_8c_html_ab10805c3f299952d6f907661e2e155f8"><div class="ttname"><a href="#ab10805c3f299952d6f907661e2e155f8">LightGrayColor</a></div><div class="ttdeci">#define LightGrayColor</div><div class="ttdef"><b>Definition</b> mai.c:88</div></div>
 </div><!-- fragment --></td></tr>
   </table>

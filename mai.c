@@ -54,7 +54,7 @@
  * - @ref InputValues — reads the equation coefficients
  * - @ref InputWithCommentColor — reads a floating-point value with a colored prompt
  * - @ref OutputValues — displays the solution
- * - @ref OutputEquationColor — displays the equation using a specified color
+ * - @ref PrintfColorTreeArgument — displays the equation using a specified color
  * - @ref PrintfColor — displays a string using a specified color
  * - @ref PrintfColorOneArgument — displays a formatted value using a specified color
  * - @ref PrintASCII — displays an ASCII image from a text file
@@ -98,52 +98,67 @@
 
 //----------------------------------------------------------------
 
-enum CompIndicators
+struct TestSquare
     {
-    e_AreMore  =  1,
-    e_AreLess  = -1,
-    e_AreEqual =  0
-    };
-
-enum RootNumber
-    {
-    e_ZeroRoot = 0,
-    e_OneRoot  = 1,
-    e_TwoRoot  = 2,
-    e_ManyRoot = 3
+        float a, b, c;
+        int   RootsRef;
+        float x1Ref, x2Ref;
     };
 
 //----------------------------------------------------------------
 
-RootNumber     SolvingEquation        (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-RootNumber     SolvingSquare          (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-void           OutputValues           (int         res,         float  x1,          float  x2, int    TextColor, int    AnswerColor);
-void           OutputEquationColor    (const char* String,      float  a,           float  b,  float  c,         int    Color);
-RootNumber     SolvingLine            (float       b,           float  c,           float* x1_ptr);
-bool           InputWithCommentColor  (const char* String,      float* InputNumber, int    Color);
-void           PrintfColorOneArgument (const char* String,      float  x,           int    Color);
-bool           InputValues            (float*      a,           float* b,           float* c);
-CompIndicators CompFloat              (float       FirstNumber, float  SecondNumber);
-void           PrintfColor            (const char* String,      int    Color);
-void           PrintASCII             (const char* FileName,    int    Color);
+enum CompIndicators
+    {
+        e_AreMore  =  1,
+        e_AreLess  = -1,
+        e_AreEqual =  0
+    };
 
+enum RootNumber
+    {
+        e_ZeroRoot = 0,
+        e_OneRoot  = 1,
+        e_TwoRoot  = 2,
+        e_ManyRoot = 3
+    };
+
+//----------------------------------------------------------------
+
+RootNumber     SolvingEquation         (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
+RootNumber     SolvingSquare           (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
+void           OutputValues            (int         res,         float  x1,          float  x2, int    TextColor, int    AnswerColor);
+void           PrintfColorTreeArgument (const char* String,      float  a,           float  b,  float  c,         int    Color);
+RootNumber     SolvingLine             (float       b,           float  c,           float* x1_ptr);
+bool           InputWithCommentColor   (const char* String,      float* InputNumber, int    Color);
+void           PrintfColorOneArgument  (const char* String,      float  x,           int    Color);
+bool           InputValues             (float*      a,           float* b,           float* c);
+CompIndicators CompFloat               (float       FirstNumber, float  SecondNumber);
+void           PrintfColor             (const char* String,      int    Color);
+bool           PrintASCII              (const char* FileName,    int    Color);
+bool            RunOneTest              (TestSquare  test);
+int            RunAllTest              (void);
 
 //----------------------------------------------------------------
 
 const double EPS       = 1e-5;
 const bool   IsANumber = true;
+const int    LEN       = 256;
+const bool   TestPassed  = false;
+const bool   TestFailed  = true;
 
 //----------------------------------------------------------------
 
 int main (void)
 {
-    PrintASCII ("ascii-art.txt", LightRedColor);
+    PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
+
+    RunAllTest ();
 
     float a = 0, b = 0, c = 0;
 
     if (InputValues (&a, &b, &c) == false) return 0;
 
-    OutputEquationColor("%fx^2 + %fx + %f = 0\n", a, b, c, LightMagentaColor);
+    PrintfColorTreeArgument("%fx^2 + %fx + %f = 0\n", a, b, c, LightMagentaColor);
 
     float x1_ptr = 0, x2_ptr = 0;
     int res = SolvingEquation (a, b, c, &x1_ptr, &x2_ptr);
@@ -503,8 +518,7 @@ bool InputWithCommentColor (const char* String, float* InputNumber, int Color)
 
         PrintfColor (String,Color);
 
-        if (scanf ("%f", InputNumber) == IsANumber) return true;
-        else                                        return false;
+        return (scanf ("%f", InputNumber) == IsANumber);
     }
 
 //----------------------------------------------------------------
@@ -552,26 +566,26 @@ CompIndicators CompFloat (float FirstNumber, float SecondNumber)
  *
  *         The function code looks like this:
  * \code
-           void OutputEquationColor (const char* String, float a, float b, float c, int Color)
+           void PrintfColorTreeArgument (const char* String, float a, float b, float c, int Color)
             {
                 assert (String);
 
                 txSetConsoleAttr (Color);
                 printf (String, a, b, c);
-                txSetConsoleAttr (0x8);
+                txSetConsoleAttr (LightGrayColor);
             }
  * \endcode
  *
  * @note The console color is restored after the equation is displayed
  */
 
-void OutputEquationColor (const char* String, float a, float b, float c, int Color)
+void PrintfColorTreeArgument (const char* String, float a, float b, float c, int Color)
     {
         assert (String);
 
         txSetConsoleAttr (Color);
         printf (String, a, b, c);
-        txSetConsoleAttr (0x8);
+        txSetConsoleAttr (LightGrayColor);
     }
 
 //----------------------------------------------------------------
@@ -644,6 +658,7 @@ void PrintfColorOneArgument (const char* String, float x, int Color)
  *
  * @param [in] FileName Name of the text file containing the ASCII image
  * @param [in] Color    Console color used to display the ASCII image
+ *
  *                      The function code looks like this:
  * \code
            void PrintASCII (const char* FileName, int Color)
@@ -674,16 +689,21 @@ void PrintfColorOneArgument (const char* String, float x, int Color)
  * @note The console color is restored after the image is displayed
  */
 
-void PrintASCII (const char* FileName, int Color)
+bool PrintASCII (const char* FileName, int Color)
     {
         assert(FileName);
 
         FILE* File = fopen (FileName, "r");
 
+        if (File == NULL)
+            {
+                PrintfColor("Input Error File\n", RedColor);
+                return false;
+            }
 
         txSetConsoleAttr (Color);
 
-        char String[256] = {};
+        char String[LEN] = {};
 
         while (fgets (String, sizeof (String), File) != NULL)
             {
@@ -693,4 +713,51 @@ void PrintASCII (const char* FileName, int Color)
         txSetConsoleAttr (LightGrayColor);
 
         fclose (File);
+
+        return true;
+    }
+
+//----------------------------------------------------------------
+
+bool RunOneTest (TestSquare  test) // TODO
+    {
+        float x1 = 0, x2 = 0;
+        RootNumber Roots = SolvingEquation (test.a, test.b, test.c, &x1, &x2);
+
+        printf("%d and %d\n", Roots,test.RootsRef);
+
+        if ((Roots != test.RootsRef) || (x1 != test.x1Ref) || (x2 != test.x1Ref)) PrintfColor ("Close\n", RedColor);
+
+        PrintfColor ("APPROVED\n", GreenColor);
+
+        return TestPassed;
+    }
+
+//----------------------------------------------------------------
+
+int RunAllTest (void)
+    {
+        struct TestSquare test1  = {.a = 1,  .b =  2,  .c =  1, .RootsRef = e_OneRoot, .x1Ref = -1};
+        struct TestSquare test2  = {.a = 1,  .b = -3,  .c =  2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref =  1};
+        struct TestSquare test3  = {.a = 1,  .b =  0,  .c = -4, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -2};
+        struct TestSquare test4  = {.a = 1,  .b =  0,  .c =  1, .RootsRef = e_ZeroRoot};
+        struct TestSquare test5  = {.a = 1,  .b =  2,  .c =  5, .RootsRef = e_ZeroRoot};
+        struct TestSquare test6  = {.a = 2,  .b =  4,  .c =  2, .RootsRef = e_OneRoot, .x1Ref = -1};
+        struct TestSquare test7  = {.a = 2,  .b = -8,  .c =  8, .RootsRef = e_OneRoot, .x1Ref =  2};
+        struct TestSquare test8  = {.a = 1,  .b = -5,  .c =  6, .RootsRef = e_TwoRoot, .x1Ref =  3, .x2Ref =  2};
+        struct TestSquare test9  = {.a = 1,  .b =  1,  .c = -6, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -3};
+        struct TestSquare test10 = {.a = 1,  .b = -1,  .c = -2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -1};
+
+        RunOneTest (test1);
+        RunOneTest (test2);
+        RunOneTest (test3);
+        RunOneTest (test4);
+        RunOneTest (test5);
+        RunOneTest (test6);
+        RunOneTest (test7);
+        RunOneTest (test8);
+        RunOneTest (test9);
+        RunOneTest (test10);
+
+        return 1;
     }
