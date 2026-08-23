@@ -468,7 +468,7 @@ RootNumber SolvingSquare (float a, float b, float c, float* x1_ptr, float* x2_pt
 
                 if (CompFloat (discriminant, 0) == e_AreEqual)
                     {
-                        *x1_ptr = (-b) / (2 * a);
+                        *x1_ptr = *x2_ptr = (-b) / (2 * a);
 
                         return e_OneRoot;
                     }
@@ -719,7 +719,7 @@ bool PrintASCII (const char* FileName, int Color)
 
 //----------------------------------------------------------------
 
-bool RunOneTest (TestSquare  test)
+bool RunOneTest (TestSquare  test) // TODO
     {
         float x1 = 0, x2 = 0;
         RootNumber Roots = SolvingEquation (test.a, test.b, test.c, &x1, &x2);

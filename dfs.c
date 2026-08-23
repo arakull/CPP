@@ -30,7 +30,7 @@ bool RunOneTest (TestSquare  test) // TODO
         float x1 = 0, x2 = 0;
         RootNumber Roots = SolvingEquation (test.a, test.b, test.c, &x1, &x2);
 
-                        PrintfColorTreeArgument("%fx^2 + %fx + %f = 0\n",                 test.a,        test.b,     test.c,     LightMagentaColor);
+                       PrintfColorTreeArgument("%fx^2 + %fx + %f = 0\n",                 test.a,        test.b,     test.c,     LightMagentaColor);
                        PrintfColorTreeArgument("Test Fail: a = %f, b = %f, c = %f\n",    test.a,        test.b,     test.c,     RedColor);
                        PrintfColorTreeArgument("Expected: %d roots; x1 = %f; x2 = %f\n", test.RootsRef, test.x1Ref, test.x2Ref, YellowColor);
                        PrintfColorTreeArgument("Received: %d roots; x1 = %f; x2 = %f\n", Roots,         x1,         x2,         BlueColor);
