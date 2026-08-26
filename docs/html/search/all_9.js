@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['output_0',['Console Output',['../index.html#console',1,'']]],
-  ['outputequationcolor_1',['OutputEquationColor',['../mai_8c.html#a2757bc1211bf3efcc8b59aadabd46333',1,'mai.c']]],
-  ['outputvalues_2',['OutputValues',['../mai_8c.html#ac01c4dc1684c5937a9f8a78906067eda',1,'mai.c']]]
+  ['magentacolor_0',['MagentaColor',['../mai_8c.html#a8787b259d01ac56f3b5736abe694945b',1,'mai.c']]],
+  ['mai_2ec_1',['mai.c',['../mai_8c.html',1,'']]],
+  ['main_2',['main',['../mai_8c.html#a840291bc02cba5474a4cb46a9b9566fe',1,'mai.c']]]
 ];

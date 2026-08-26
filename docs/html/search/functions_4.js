@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['printascii_0',['PrintASCII',['../mai_8c.html#a15642b0a4c1f144146d1e449ccb937b9',1,'mai.c']]],
-  ['printfcolor_1',['PrintfColor',['../mai_8c.html#abe47204e50f41e2d2092352c9794c058',1,'mai.c']]],
-  ['printfcoloroneargument_2',['PrintfColorOneArgument',['../mai_8c.html#a8e0f219518ae53bd2b6b71256782f896',1,'mai.c']]]
+  ['runalltest_0',['RunAllTest',['../mai_8c.html#a5d89eb354a5e5ba93b5b21880a872f6e',1,'mai.c']]],
+  ['runonetest_1',['RunOneTest',['../mai_8c.html#a4ad260542b1742b6678d2198d6a89c35',1,'mai.c']]]
 ];

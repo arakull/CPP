@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['greencolor_0',['GreenColor',['../mai_8c.html#a6464056114f108983d742b728a2d8ea5',1,'mai.c']]]
+  ['features_0',['Features',['../index.html#features',1,'']]],
+  ['floating_20point_20precision_1',['Floating-Point Precision',['../index.html#precision',1,'']]]
 ];

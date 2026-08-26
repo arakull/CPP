@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['solvingequation_0',['SolvingEquation',['../mai_8c.html#a375fb586081f2ce064ac23096bb580db',1,'mai.c']]],
-  ['solvingline_1',['SolvingLine',['../mai_8c.html#a44c11c56e64633346a1084501f947c8d',1,'mai.c']]],
-  ['solvingsquare_2',['SolvingSquare',['../mai_8c.html#ab9e18f51964ef67a7764c677917c8778',1,'mai.c']]]
+  ['solvequation_0',['SolvEquation',['../mai_8c.html#a85227eedd2723b59d5d7fbeca93f1710',1,'mai.c']]],
+  ['solvline_1',['SolvLine',['../mai_8c.html#a7331f368b6ed32fc7ceceaa053a4c863',1,'mai.c']]],
+  ['solvsquare_2',['SolvSquare',['../mai_8c.html#a43598d1a086925b5534016f0189330d3',1,'mai.c']]]
 ];

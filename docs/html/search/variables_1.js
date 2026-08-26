@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isanumber_0',['IsANumber',['../mai_8c.html#a5a77079651a51a63a93c8cd1d2f5a7b0',1,'mai.c']]]
+  ['b_0',['b',['../struct_test_square.html#a83fc1af92e29717b4513d121b0c72c7d',1,'TestSquare']]]
 ];

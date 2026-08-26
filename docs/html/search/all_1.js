@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['compfloat_0',['CompFloat',['../mai_8c.html#a2d9a4123dce946bc413e3d79080430e0',1,'mai.c']]],
-  ['compindicators_1',['CompIndicators',['../mai_8c.html#a96327838e54fa47b6e47d27e2af9b400',1,'mai.c']]],
-  ['console_20output_2',['Console Output',['../index.html#console',1,'']]],
-  ['cyancolor_3',['CyanColor',['../mai_8c.html#a61e1e7755346a1b013b7bcf41056dc0f',1,'mai.c']]]
+  ['b_0',['b',['../struct_test_square.html#a83fc1af92e29717b4513d121b0c72c7d',1,'TestSquare']]],
+  ['blackcolor_1',['BlackColor',['../mai_8c.html#a27e3a449691086bc3aa87f47c4e46c80',1,'mai.c']]],
+  ['bluecolor_2',['BlueColor',['../mai_8c.html#a63fab556bd8197793e3564ce5ff412e7',1,'mai.c']]]
 ];

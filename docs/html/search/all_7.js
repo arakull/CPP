@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['lightbluecolor_0',['LightBlueColor',['../mai_8c.html#a567fbdef0583568b19d33a8fb3b9c9d9',1,'mai.c']]],
-  ['lightgraycolor_1',['LightGrayColor',['../mai_8c.html#ab10805c3f299952d6f907661e2e155f8',1,'mai.c']]],
-  ['lightgreencolor_2',['LightGreenColor',['../mai_8c.html#a5fad656725e7be844d4d9cbf1779a7b0',1,'mai.c']]],
-  ['lightmagentacolor_3',['LightMagentaColor',['../mai_8c.html#a5a85f44d09a52a0d1fed9113ff847854',1,'mai.c']]],
-  ['lightredcolor_4',['LightRedColor',['../mai_8c.html#a3374c1a3b1609174211fb7aa23ac0820',1,'mai.c']]]
+  ['inputvalues_0',['InputValues',['../mai_8c.html#a83c497b034c7d18157550ce1224b8388',1,'mai.c']]],
+  ['inputwithcolorcomment_1',['InputWithColorComment',['../mai_8c.html#a68865f7a8eed64ce98d077420758652a',1,'mai.c']]],
+  ['introduction_2',['Introduction',['../index.html#intro',1,'']]],
+  ['isanumber_3',['IsANumber',['../mai_8c.html#a5a77079651a51a63a93c8cd1d2f5a7b0',1,'mai.c']]]
 ];

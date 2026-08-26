@@ -1,5 +1,6 @@
 var mai_8c =
 [
+    [ "TestSquare", "struct_test_square.html", "struct_test_square" ],
     [ "BlackColor", "mai_8c.html#a27e3a449691086bc3aa87f47c4e46c80", null ],
     [ "BlueColor", "mai_8c.html#a63fab556bd8197793e3564ce5ff412e7", null ],
     [ "CyanColor", "mai_8c.html#a61e1e7755346a1b013b7bcf41056dc0f", null ],
@@ -28,16 +29,22 @@ var mai_8c =
     ] ],
     [ "CompFloat", "mai_8c.html#a2d9a4123dce946bc413e3d79080430e0", null ],
     [ "InputValues", "mai_8c.html#a83c497b034c7d18157550ce1224b8388", null ],
-    [ "InputWithCommentColor", "mai_8c.html#a007e437fea2cdfc8fecc8566439a327d", null ],
+    [ "InputWithColorComment", "mai_8c.html#a68865f7a8eed64ce98d077420758652a", null ],
     [ "main", "mai_8c.html#a840291bc02cba5474a4cb46a9b9566fe", null ],
-    [ "OutputEquationColor", "mai_8c.html#a2757bc1211bf3efcc8b59aadabd46333", null ],
-    [ "OutputValues", "mai_8c.html#ac01c4dc1684c5937a9f8a78906067eda", null ],
-    [ "PrintASCII", "mai_8c.html#a15642b0a4c1f144146d1e449ccb937b9", null ],
+    [ "PrintASCII", "mai_8c.html#a0527b15c45d2c587dfcf1e662f9abe65", null ],
     [ "PrintfColor", "mai_8c.html#abe47204e50f41e2d2092352c9794c058", null ],
-    [ "PrintfColorOneArgument", "mai_8c.html#a8e0f219518ae53bd2b6b71256782f896", null ],
-    [ "SolvingEquation", "mai_8c.html#a375fb586081f2ce064ac23096bb580db", null ],
-    [ "SolvingLine", "mai_8c.html#a44c11c56e64633346a1084501f947c8d", null ],
-    [ "SolvingSquare", "mai_8c.html#ab9e18f51964ef67a7764c677917c8778", null ],
+    [ "PrintfColorArgument", "mai_8c.html#afb18cab6dc5dbc456373d2f8e375950f", null ],
+    [ "PrintValues", "mai_8c.html#aa7c7b9886cdc2852409f3e09270a397d", null ],
+    [ "RunAllTest", "mai_8c.html#a5d89eb354a5e5ba93b5b21880a872f6e", null ],
+    [ "RunOneTest", "mai_8c.html#a4ad260542b1742b6678d2198d6a89c35", null ],
+    [ "SolvEquation", "mai_8c.html#a85227eedd2723b59d5d7fbeca93f1710", null ],
+    [ "SolvLine", "mai_8c.html#a7331f368b6ed32fc7ceceaa053a4c863", null ],
+    [ "SolvSquare", "mai_8c.html#a43598d1a086925b5534016f0189330d3", null ],
+    [ "TestFailOneRoot", "mai_8c.html#ada6a35cff2fe5b6eb14b2aa774ad4af9", null ],
+    [ "TestFailTwoRoot", "mai_8c.html#a3fb66146fe9bb21abc2ff345b2fa9d54", null ],
     [ "EPS", "mai_8c.html#afe01386a82fedc016455a43c20280a97", null ],
-    [ "IsANumber", "mai_8c.html#a5a77079651a51a63a93c8cd1d2f5a7b0", null ]
+    [ "IsANumber", "mai_8c.html#a5a77079651a51a63a93c8cd1d2f5a7b0", null ],
+    [ "LEN", "mai_8c.html#a06ac55907a9e7741cbc2de663ea57c37", null ],
+    [ "TestFailed", "mai_8c.html#afc84a1edd71db8cc63c99221a57c4a88", null ],
+    [ "TestPassed", "mai_8c.html#a7c8450cc8496f94e8902a8a004bb4f6c", null ]
 ];

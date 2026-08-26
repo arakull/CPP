@@ -24,12 +24,16 @@
 */
 var NAVTREE =
 [
-  [ "Quadratic Equation Solver", "index.html", [
-    [ "Introduction", "index.html#intro", null ],
-    [ "Features", "index.html#features", null ],
-    [ "Program Structure", "index.html#structure", null ],
-    [ "Floating-Point Precision", "index.html#precision", null ],
-    [ "Console Output", "index.html#console", null ],
+  [ "Solving the quadratic equation", "index.html", [
+    [ "Quadratic Equation Solver", "index.html", "index" ],
+    [ "Data Structures", "annotated.html", [
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Structure Index", "classes.html", null ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
@@ -46,7 +50,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"files.html"
+"annotated.html"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';
