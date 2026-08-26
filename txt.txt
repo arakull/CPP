@@ -124,25 +124,27 @@ enum RootNumber
 
 //----------------------------------------------------------------
 
-RootNumber     SolvingEquation         (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-RootNumber     SolvingSquare           (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-void           OutputValues            (int         res,         float  x1,          float  x2, int    TextColor, int    AnswerColor);
-void           PrintfColorTreeArgument (const char* String,      float  a,           float  b,  float  c,         int    Color);
+RootNumber     SolvingEquation         (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);  //TODO: уюрать инг окончание
+RootNumber     SolvingSquare           (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr); //TODO: убрать инг окончание
+void           OutputValues            (int         res,         float  x1,          float  x2, int    TextColor, int    AnswerColor); //TODO: переимновать функцию на глагол и переименовать res, задать рес енам
+void           PrintfColorTreeArgument (const char* String,      float  a,           float  b,  float  c,         int    Color); //TODO: заменить одной фцнцикй
 RootNumber     SolvingLine             (float       b,           float  c,           float* x1_ptr);
-bool           InputWithCommentColor   (const char* String,      float* InputNumber, int    Color);
-void           PrintfColorOneArgument  (const char* String,      float  x,           int    Color);
-bool           InputValues             (float*      a,           float* b,           float* c);
+bool           InputWithCommentColor   (const char* String,      float* InputNumber, int    Color); //TODO: переименовать понятнее
+void           PrintfColorOneArgument  (const char* String,      float  x,           int    Color); //TODO: убрать функцию
+bool           InputValues             (float*      a,           float* b,           float* c); //TODO: сделать понятнее название
 CompIndicators CompFloat               (float       FirstNumber, float  SecondNumber);
 void           PrintfColor             (const char* String,      int    Color);
 bool           PrintASCII              (const char* FileName,    int    Color);
-bool            RunOneTest              (TestSquare  test);
+bool           RunOneTest              (TestSquare  test);
 int            RunAllTest              (void);
+void           TestFailOneRoot         (TestSquare  test,        float x1Ref);
+void           TestFailTwoRoot         (TestSquare  test, float x1, float x2, int Roots);
 
 //----------------------------------------------------------------
 
-const double EPS       = 1e-5;
-const bool   IsANumber = true;
-const int    LEN       = 256;
+const double EPS         = 1e-5;
+const bool   IsANumber   = true;
+const int    LEN         = 256;
 const bool   TestPassed  = false;
 const bool   TestFailed  = true;
 
@@ -150,7 +152,7 @@ const bool   TestFailed  = true;
 
 int main (void)
 {
-    PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
+    // PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
 
     RunAllTest ();
 
@@ -468,7 +470,7 @@ RootNumber SolvingSquare (float a, float b, float c, float* x1_ptr, float* x2_pt
 
                 if (CompFloat (discriminant, 0) == e_AreEqual)
                     {
-                        *x1_ptr = *x2_ptr = (-b) / (2 * a);
+                        *x1_ptr = (-b) / (2 * a);
 
                         return e_OneRoot;
                     }
@@ -642,7 +644,7 @@ void PrintfColor (const char* String, int Color)
  * @note The console color is restored after the value is displayed
  */
 
-void PrintfColorOneArgument (const char* String, float x, int Color)
+void PrintfColorOneArgument (const char* String, float x, int Color) //TODO: проврить работу
     {
         assert (String);
 
@@ -719,7 +721,7 @@ bool PrintASCII (const char* FileName, int Color)
 
 //----------------------------------------------------------------
 
-bool RunOneTest (TestSquare  test) // TODO
+bool RunOneTest (TestSquare  test)
     {
         float x1 = 0, x2 = 0;
         RootNumber Roots = SolvingEquation (test.a, test.b, test.c, &x1, &x2);
@@ -740,16 +742,12 @@ bool RunOneTest (TestSquare  test) // TODO
 
                         case e_OneRoot:     if ((CompFloat(x1, test.x1Ref) != e_AreEqual))
                                                 {
-                                                    PrintfColor ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
-                                                    PrintfColorOneArgument("Expected: x1 = %f\n",test.x1Ref,BlueColor);
-                                                    PrintfColorOneArgument("Received: x1 = %f\n",x1, YellowColor);
+                                                    TestFailOneRoot (test, x1);
                                                     return TestFailed;
                                                     break;
                                                 }
 
-                        case e_TwoRoot:     PrintfColor ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
-                                            PrintfColorTreeArgument("Expected: %d roots; x1 = %f; x2 = %f\n", int(test.RootsRef), test.x1Ref, test.x2Ref, YellowColor);
-                                            PrintfColorTreeArgument("Received: %d roots; x1 = %f; x2 = %f\n", Roots,         x1,         x2,         BlueColor);
+                        case e_TwoRoot:     TestFailTwoRoot (test, x1, x2, Roots);
                                             return TestFailed;
                                             break;
 
@@ -769,27 +767,34 @@ bool RunOneTest (TestSquare  test) // TODO
 
 int RunAllTest (void)
     {
-        struct TestSquare test1  = {.a = 1,  .b =  2,  .c =  1, .RootsRef = e_OneRoot, .x1Ref = -1};
-        struct TestSquare test2  = {.a = 1,  .b = -3,  .c =  2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref =  1};
-        struct TestSquare test3  = {.a = 1,  .b =  0,  .c = -4, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -2};
-        struct TestSquare test4  = {.a = 1,  .b =  0,  .c =  1, .RootsRef = e_ZeroRoot};
-        struct TestSquare test5  = {.a = 1,  .b =  2,  .c =  5, .RootsRef = e_ZeroRoot};
-        struct TestSquare test6  = {.a = 2,  .b =  4,  .c =  2, .RootsRef = e_OneRoot, .x1Ref = -1};
-        struct TestSquare test7  = {.a = 2,  .b = -8,  .c =  8, .RootsRef = e_OneRoot, .x1Ref =  2};
-        struct TestSquare test8  = {.a = 1,  .b = -5,  .c =  6, .RootsRef = e_TwoRoot, .x1Ref =  3, .x2Ref =  2};
-        struct TestSquare test9  = {.a = 1,  .b =  1,  .c = -6, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -3};
-        struct TestSquare test10 = {.a = 1,  .b = -1,  .c = -2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -1};
+        TestSquare testsAll[10] = { {.a = 1,  .b =  2,  .c =  1, .RootsRef = e_OneRoot, .x1Ref = -1},
+                                    {.a = 1,  .b = -3,  .c =  2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref =  1},
+                                    {.a = 1,  .b =  0,  .c = -4, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -2},
+                                    {.a = 1,  .b =  0,  .c =  1, .RootsRef = e_ZeroRoot},
+                                    {.a = 1,  .b =  2,  .c =  5, .RootsRef = e_ZeroRoot},
+                                    {.a = 2,  .b =  4,  .c =  2, .RootsRef = e_OneRoot, .x1Ref = -1},
+                                    {.a = 2,  .b = -8,  .c =  8, .RootsRef = e_OneRoot, .x1Ref =  2},
+                                    {.a = 1,  .b = -5,  .c =  6, .RootsRef = e_TwoRoot, .x1Ref =  3, .x2Ref =  2},
+                                    {.a = 1,  .b =  1,  .c = -6, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -3},
+                                    {.a = 1,  .b = -1,  .c = -2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -1},
+                                  };
 
-        RunOneTest (test1);
-        RunOneTest (test2);
-        RunOneTest (test3);
-        RunOneTest (test4);
-        RunOneTest (test5);
-        RunOneTest (test6);
-        RunOneTest (test7);
-        RunOneTest (test8);
-        RunOneTest (test9);
-        RunOneTest (test10);
+        int size = sizeof(testsAll) / sizeof(TestSquare);
+        for (int  i = 0; i < size; i++) RunOneTest (testsAll[i]);
 
         return 1;
+    }
+
+void TestFailOneRoot (TestSquare  test, float x1)
+        {
+            PrintfColor ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
+            PrintfColorOneArgument("Expected: x1 = %f\n", test.x1Ref, BlueColor);
+            PrintfColorOneArgument("Received: x1 = %f\n", x1, YellowColor);
+        }
+
+void TestFailTwoRoot (TestSquare  test, float x1, float x2, int Roots)
+    {
+        PrintfColor ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
+        PrintfColorTreeArgument("Expected: %d roots; x1 = %f; x2 = %f\n", test.RootsRef, test.x1Ref, test.x2Ref, YellowColor);
+        PrintfColorTreeArgument("Received: %d roots; x1 = %f; x2 = %f\n", Roots, x1, x2, BlueColor);
     }
