@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['solvequation_0',['SolvEquation',['../_q_e_s_8c.html#a85227eedd2723b59d5d7fbeca93f1710',1,'QES.c']]],
-  ['solvline_1',['SolvLine',['../_q_e_s_8c.html#a7331f368b6ed32fc7ceceaa053a4c863',1,'QES.c']]],
-  ['solvsquare_2',['SolvSquare',['../_q_e_s_8c.html#a43598d1a086925b5534016f0189330d3',1,'QES.c']]]
+  ['runalltest_0',['RunAllTest',['../_q_e_s_8c.html#a5d89eb354a5e5ba93b5b21880a872f6e',1,'QES.c']]],
+  ['runonetest_1',['RunOneTest',['../_q_e_s_8c.html#a4ad260542b1742b6678d2198d6a89c35',1,'QES.c']]]
 ];

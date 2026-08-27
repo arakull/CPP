@@ -117,6 +117,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('_q_e_s_8c.html
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;assert.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -173,8 +175,12 @@ Functions</h2></td></tr>
 <tr class="memdesc:a68865f7a8eed64ce98d077420758652a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a floating-point value with a colored text prompt.  <br /></td></tr>
 <tr class="memitem:a83c497b034c7d18157550ce1224b8388" id="r_a83c497b034c7d18157550ce1224b8388"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a83c497b034c7d18157550ce1224b8388">InputValues</a> (float *a, float *b, float *c)</td></tr>
 <tr class="memdesc:a83c497b034c7d18157550ce1224b8388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all equation coefficients from the user.  <br /></td></tr>
+<tr class="memitem:ac7b6eca7c101894728afe922fb67e82c" id="r_ac7b6eca7c101894728afe922fb67e82c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac7b6eca7c101894728afe922fb67e82c">CheckLoginPassword</a> (int TextColor, int PictureColor, const char *FileName)</td></tr>
+<tr class="memdesc:ac7b6eca7c101894728afe922fb67e82c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the user's login and password and displays the ASCII art of the authorized user.  <br /></td></tr>
 <tr class="memitem:a2d9a4123dce946bc413e3d79080430e0" id="r_a2d9a4123dce946bc413e3d79080430e0"><td class="memItemLeft"><a class="el" href="#a96327838e54fa47b6e47d27e2af9b400">CompIndicators</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2d9a4123dce946bc413e3d79080430e0">CompFloat</a> (float FirstNumber, float SecondNumber)</td></tr>
 <tr class="memdesc:a2d9a4123dce946bc413e3d79080430e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two floating-point numbers with EPS precision.  <br /></td></tr>
+<tr class="memitem:a245d88d115669fec1c042d0a94c23b81" id="r_a245d88d115669fec1c042d0a94c23b81"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a245d88d115669fec1c042d0a94c23b81">fnv32_hash</a> (const char *str, size_t len)</td></tr>
+<tr class="memdesc:a245d88d115669fec1c042d0a94c23b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the 32-bit FNV-1a hash of a string.  <br /></td></tr>
 <tr class="memitem:abe47204e50f41e2d2092352c9794c058" id="r_abe47204e50f41e2d2092352c9794c058"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abe47204e50f41e2d2092352c9794c058">PrintfColor</a> (const char *String, int Color)</td></tr>
 <tr class="memdesc:abe47204e50f41e2d2092352c9794c058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays a string using the specified console color.  <br /></td></tr>
 <tr class="memitem:a0527b15c45d2c587dfcf1e662f9abe65" id="r_a0527b15c45d2c587dfcf1e662f9abe65"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0527b15c45d2c587dfcf1e662f9abe65">PrintASCII</a> (const char *FileName, int Color)</td></tr>
@@ -194,6 +200,11 @@ Variables</h2></td></tr>
 <tr class="memitem:a06ac55907a9e7741cbc2de663ea57c37" id="r_a06ac55907a9e7741cbc2de663ea57c37"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a06ac55907a9e7741cbc2de663ea57c37">LEN</a> = 256</td></tr>
 <tr class="memitem:a7c8450cc8496f94e8902a8a004bb4f6c" id="r_a7c8450cc8496f94e8902a8a004bb4f6c"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c8450cc8496f94e8902a8a004bb4f6c">TestPassed</a> = false</td></tr>
 <tr class="memitem:afc84a1edd71db8cc63c99221a57c4a88" id="r_afc84a1edd71db8cc63c99221a57c4a88"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#afc84a1edd71db8cc63c99221a57c4a88">TestFailed</a> = true</td></tr>
+<tr class="memitem:a361fd36739decab31cd5fa20a1af6532" id="r_a361fd36739decab31cd5fa20a1af6532"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#a361fd36739decab31cd5fa20a1af6532">Right</a> = true</td></tr>
+<tr class="memitem:af6652c896f39ddb233b61d95ec36828f" id="r_af6652c896f39ddb233b61d95ec36828f"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#af6652c896f39ddb233b61d95ec36828f">Incorrect</a> = true</td></tr>
+<tr class="memitem:a743ced80ad6a7072874a1dfa2b1e7cd3" id="r_a743ced80ad6a7072874a1dfa2b1e7cd3"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a743ced80ad6a7072874a1dfa2b1e7cd3">MaxLenLogin</a> = 50</td></tr>
+<tr class="memitem:abcc4107676d74d7ede7eb4dcc0069ce8" id="r_abcc4107676d74d7ede7eb4dcc0069ce8"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#abcc4107676d74d7ede7eb4dcc0069ce8">MaxLenPassword</a> = 50</td></tr>
+<tr class="memitem:a57a9f2991809591ec980b440d467de78" id="r_a57a9f2991809591ec980b440d467de78"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a57a9f2991809591ec980b440d467de78">MaxPhotoFileName</a> = 100</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a27e3a449691086bc3aa87f47c4e46c80" name="a27e3a449691086bc3aa87f47c4e46c80"></a>
@@ -447,6 +458,50 @@ Variables</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="ac7b6eca7c101894728afe922fb67e82c" name="ac7b6eca7c101894728afe922fb67e82c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7b6eca7c101894728afe922fb67e82c">&#9670;&#160;</a></span>CheckLoginPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CheckLoginPassword </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>TextColor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>PictureColor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>FileName</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks the user's login and password and displays the ASCII art of the authorized user. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">TextColor</td><td>Color used to display authorization text </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">PictureColor</td><td>Color used to display the ASCII art </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the file containing user credentials</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the login and password are correct or authorization is skipped </dd>
+<dd>
+false if the login or password is incorrect or the file cannot be opened</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The entered password is converted to an FNV-1a hash before comparison</dd>
+<dd>
+If the user enters None as the login, the authorization process is skipped</dd>
+<dd>
+If the login and password are correct, the corresponding user's ASCII art is displayed </dd></dl>
+
+</div>
+</div>
 <a id="a2d9a4123dce946bc413e3d79080430e0" name="a2d9a4123dce946bc413e3d79080430e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2d9a4123dce946bc413e3d79080430e0">&#9670;&#160;</a></span>CompFloat()</h2>
 
@@ -480,6 +535,39 @@ e_AreLess if FirstNumber is less than SecondNumber </dd>
 <dd>
 e_AreEqual if the numbers are equal within EPS precision</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The EPS (epsilon) value was calculated based on the selected float data type, if desired, you can change it in the constants section </dd></dl>
+
+</div>
+</div>
+<a id="a245d88d115669fec1c042d0a94c23b81" name="a245d88d115669fec1c042d0a94c23b81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a245d88d115669fec1c042d0a94c23b81">&#9670;&#160;</a></span>fnv32_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t fnv32_hash </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>str</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates the 32-bit FNV-1a hash of a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>String to be hashed </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>Length of the string in bytes</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>32-bit FNV-1a hash value</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The function is based on the FNV-1a hash implementation from Peter Scott's murmur3 repository example.c</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a href="https://github.com/PeterScott/murmur3/blob/master/example.c">https://github.com/PeterScott/murmur3/blob/master/example.c</a> </dd></dl>
 
 </div>
 </div>
@@ -1017,6 +1105,20 @@ The console color is restored after the image is displayed </dd></dl>
 
 </div>
 </div>
+<a id="af6652c896f39ddb233b61d95ec36828f" name="af6652c896f39ddb233b61d95ec36828f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6652c896f39ddb233b61d95ec36828f">&#9670;&#160;</a></span>Incorrect</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool Incorrect = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5a77079651a51a63a93c8cd1d2f5a7b0" name="a5a77079651a51a63a93c8cd1d2f5a7b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5a77079651a51a63a93c8cd1d2f5a7b0">&#9670;&#160;</a></span>IsANumber</h2>
 
@@ -1039,6 +1141,62 @@ The console color is restored after the image is displayed </dd></dl>
       <table class="memname">
         <tr>
           <td class="memname">const int LEN = 256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a743ced80ad6a7072874a1dfa2b1e7cd3" name="a743ced80ad6a7072874a1dfa2b1e7cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a743ced80ad6a7072874a1dfa2b1e7cd3">&#9670;&#160;</a></span>MaxLenLogin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MaxLenLogin = 50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcc4107676d74d7ede7eb4dcc0069ce8" name="abcc4107676d74d7ede7eb4dcc0069ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcc4107676d74d7ede7eb4dcc0069ce8">&#9670;&#160;</a></span>MaxLenPassword</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MaxLenPassword = 50</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57a9f2991809591ec980b440d467de78" name="a57a9f2991809591ec980b440d467de78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a9f2991809591ec980b440d467de78">&#9670;&#160;</a></span>MaxPhotoFileName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MaxPhotoFileName = 100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a361fd36739decab31cd5fa20a1af6532" name="a361fd36739decab31cd5fa20a1af6532"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a361fd36739decab31cd5fa20a1af6532">&#9670;&#160;</a></span>Right</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool Right = true</td>
         </tr>
       </table>
 </div><div class="memdoc">

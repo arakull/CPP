@@ -5,6 +5,8 @@
 #include <math.h>
 #include <assert.h>
 #include <stdbool.h>
+#include <string.h>
+#include <stdint.h>
 
 /*!
 	\brief Library
@@ -42,6 +44,13 @@
  * - Displaying colored text in the console
  * - Displaying the equation and the solution using different colors
  * - Output of ASCII art from a document.txt
+ * - Checking the user's login and password
+ * - Hashing passwords using the FNV-1a algorithm
+ * - Reading user credentials and ASCII image names from a file
+ * - Displaying an ASCII image of the authorized user
+ * - Testing the equation solver using predefined test cases
+ * - Checking the number and values of calculated roots
+ * - Displaying information about failed tests
  *
  * @section structure Program Structure
  *
@@ -61,6 +70,8 @@
  * - @ref RunAllTest - runs all predefined test cases
  * - @ref PrintTestFailOneRoot - displays information about a failed one-root test
  * - @ref PrintTestFailTwoRoot - displays information about a failed two-root test
+ * - @ref fnv32_hash - calculates the FNV-1a hash of a string
+ * - @ref CheckLoginPassword - checks the entered login and password and displays the user's ASCII image
  *
  * @section precision Floating-Point Precision
  *
@@ -127,18 +138,20 @@ enum RootNumber
 
 //----------------------------------------------------------------
 
-void           PrintValues           (RootNumber  NumberRoots, float  x1,          float  x2, int    TextColor, int    AnswerColor);
-RootNumber     SolvEquation          (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-RootNumber     SolvSquare            (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
-void           PrintfColorArgument   (const char* String,      float  a,           float  b,  float  c,         int    Color);
-void           PrintTestFailTwoRoot  (TestSquare  test,        float x1,           float  x2, int    Roots);
-RootNumber     SolvLine              (float       b,           float  c,           float* x1_ptr);
-bool           InputWithColorComment (const char* String,      float* InputNumber, int    Color);
-bool           InputValues           (float*      a,           float* b,           float* c);
-CompIndicators CompFloat             (float       FirstNumber, float  SecondNumber);
-void           PrintfColor           (const char* String,      int    Color);
-bool           PrintASCII            (const char* FileName,    int    Color);
-void           PrintTestFailOneRoot  (TestSquare  test,        float  x1Ref);
+void           PrintValues           (RootNumber  NumberRoots, float       x1,           float       x2, int    TextColor, int    AnswerColor);
+RootNumber     SolvEquation          (float       a,           float       b,            float       c,  float* x1_ptr,    float* x2_ptr);
+RootNumber     SolvSquare            (float       a,           float       b,            float       c,  float* x1_ptr,    float* x2_ptr);
+void           PrintfColorArgument   (const char* String,      float       a,            float       b,  float  c,         int    Color);
+void           PrintTestFailTwoRoot  (TestSquare  test,        float       x1,           float       x2, int    Roots);
+RootNumber     SolvLine              (float       b,           float       c,            float*      x1_ptr);
+bool           InputWithColorComment (const char* String,      float*      InputNumber,  int         Color);
+bool           InputValues           (float*      a,           float*      b,            float*      c);
+bool           CheckLoginPassword    (int         TextColor,   int         PictureColor, const char* FileName);
+CompIndicators CompFloat             (float       FirstNumber, float       SecondNumber);
+uint32_t       fnv32_hash            (const char *str,         size_t      len);
+void           PrintfColor           (const char* String,      int         Color);
+bool           PrintASCII            (const char* FileName,    int         Color);
+void           PrintTestFailOneRoot  (TestSquare  test,        float       x1Ref);
 bool           RunOneTest            (TestSquare  test);
 int            RunAllTest            (void);
 
@@ -149,12 +162,17 @@ const bool   IsANumber   = true;
 const int    LEN         = 256;
 const bool   TestPassed  = false;
 const bool   TestFailed  = true;
+const bool   Right       = true;
+const bool   Incorrect   = true;
+const int    MaxLenLogin = 50;
+const int    MaxLenPassword = 50;
+const int    MaxPhotoFileName = 100;
 
 //----------------------------------------------------------------
 
 int main (void)
 {
-// PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
+    CheckLoginPassword (YellowColor, GreenColor, "users.txt");
 
     RunAllTest ();
 
@@ -624,3 +642,104 @@ void PrintTestFailTwoRoot (TestSquare  test, float x1, float x2, int Roots)
     }
 
 //----------------------------------------------------------------
+
+/**
+ * @brief Calculates the 32-bit FNV-1a hash of a string
+ *
+ * @param [in] str String to be hashed
+ * @param [in] len Length of the string in bytes
+ *
+ * @return 32-bit FNV-1a hash value
+ *
+ * @note The function is based on the FNV-1a hash implementation from Peter Scott's
+ *       murmur3 repository example.c
+ *
+ * @see https://github.com/PeterScott/murmur3/blob/master/example.c
+ */
+
+uint32_t fnv32_hash(const char *str, size_t len)
+    {
+        const unsigned char *s = (const unsigned char *)str;
+
+        const uint32_t FNV_32_PRIME = 0x01000193;
+
+        uint32_t h = 0x811c9dc5;
+
+        while (len--)
+            {
+                h ^= *s++;
+                h *= FNV_32_PRIME;
+            }
+
+        return h;
+    }
+
+//----------------------------------------------------------------
+
+/**
+ * @brief Checks the user's login and password and displays the ASCII art of the authorized user
+ *
+ * @param [in] TextColor Color used to display authorization text
+ * @param [in] PictureColor Color used to display the ASCII art
+ * @param [in] FileName Name of the file containing user credentials
+ *
+ * @return true if the login and password are correct or authorization is skipped
+ * @return false if the login or password is incorrect or the file cannot be opened
+ *
+ * @note The entered password is converted to an FNV-1a hash before comparison
+ *
+ * @note If the user enters None as the login, the authorization process is skipped
+ *
+ * @note If the login and password are correct, the corresponding user's ASCII art is displayed
+ */
+
+bool CheckLoginPassword (int TextColor, int PictureColor, const char* FileName)
+    {
+        assert(FileName);
+
+        char login[MaxLenLogin] = {};
+        char password[MaxLenPassword] = {};
+
+        PrintfColor ("Enter your login (Enter None to skip): \n", TextColor);
+
+        scanf("%s", login);
+
+        if (strcmp (login, "None") == 0) return Right;
+
+
+        PrintfColor ("Enter your password: \n", TextColor);
+
+        scanf("%s", password);
+
+        uint32_t passwordHash = fnv32_hash (password, strlen (password));
+
+        FILE* File = fopen (FileName, "r");
+
+        if (File == NULL)
+            {
+                PrintfColor ("Input Error File\n", RedColor);
+                return Incorrect;
+            }
+
+        char fileLogin[MaxLenLogin] = {};
+        uint32_t filePasswordHash = 0;
+        char photoFileName[MaxPhotoFileName] = {};
+
+        while (fscanf (File, "%s %u %s", fileLogin, &filePasswordHash, photoFileName) == 3)
+            {
+                if (strcmp (login, fileLogin) == 0 && passwordHash == filePasswordHash)
+                    {
+                        fclose (File);
+
+                        PrintASCII (photoFileName, PictureColor);
+
+                        return Right;
+                    }
+            }
+
+    fclose (File);
+
+    PrintfColor ("Wrong login or password\n", RedColor);
+
+    return Incorrect;
+    }
