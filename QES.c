@@ -47,17 +47,20 @@
  *
  * The program is divided into several functions:
  *
- * - @ref SolvEquation  — determines the type of equation
- * - @ref SolvLine — solves linear equations
- * - @ref SolvSquare — solves quadratic equations
- * - @ref CompFloat — compares floating-point numbers
- * - @ref InputValues — reads the equation coefficients
- * - @ref InputWithColorComment — reads a floating-point value with a colored prompt
- * - @ref PrintValues — displays the solution
- * - @ref PrintfColorArgument — displays the equation using a specified color
- * - @ref PrintfColor — displays a string using a specified color
- * - @ref PrintfColorOneArgument — displays a formatted value using a specified color
- * - @ref PrintASCII — displays an ASCII image from a text file
+ * - @ref SolvEquation  - determines the type of equation
+ * - @ref SolvLine - solves linear equations
+ * - @ref SolvSquare - solves quadratic equations
+ * - @ref CompFloat - compares floating-point numbers
+ * - @ref InputValues - reads the equation coefficients
+ * - @ref InputWithColorComment - reads a floating-point value with a colored prompt
+ * - @ref PrintValues - displays the solution
+ * - @ref PrintfColorArgument - displays the equation using a specified color
+ * - @ref PrintfColor - displays a string using a specified color
+ * - @ref PrintASCII - displays an ASCII image from a text file
+ * - @ref RunOneTest - runs and checks one test case
+ * - @ref RunAllTest - runs all predefined test cases
+ * - @ref PrintTestFailOneRoot - displays information about a failed one-root test
+ * - @ref PrintTestFailTwoRoot - displays information about a failed two-root test
  *
  * @section precision Floating-Point Precision
  *
@@ -128,14 +131,14 @@ void           PrintValues           (RootNumber  NumberRoots, float  x1,       
 RootNumber     SolvEquation          (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
 RootNumber     SolvSquare            (float       a,           float  b,           float  c,  float* x1_ptr,    float* x2_ptr);
 void           PrintfColorArgument   (const char* String,      float  a,           float  b,  float  c,         int    Color);
-void           TestFailTwoRoot       (TestSquare  test,        float x1,           float  x2, int    Roots);
+void           PrintTestFailTwoRoot  (TestSquare  test,        float x1,           float  x2, int    Roots);
 RootNumber     SolvLine              (float       b,           float  c,           float* x1_ptr);
 bool           InputWithColorComment (const char* String,      float* InputNumber, int    Color);
 bool           InputValues           (float*      a,           float* b,           float* c);
 CompIndicators CompFloat             (float       FirstNumber, float  SecondNumber);
 void           PrintfColor           (const char* String,      int    Color);
 bool           PrintASCII            (const char* FileName,    int    Color);
-void           TestFailOneRoot       (TestSquare  test,        float  x1Ref);
+void           PrintTestFailOneRoot  (TestSquare  test,        float  x1Ref);
 bool           RunOneTest            (TestSquare  test);
 int            RunAllTest            (void);
 
@@ -151,7 +154,7 @@ const bool   TestFailed  = true;
 
 int main (void)
 {
-    // PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
+// PrintASCII ("ascii-art.txt", LightRedColor); //TODO: закрыл на время
 
     RunAllTest ();
 
@@ -186,19 +189,6 @@ int main (void)
  *         e_TwoRoot  - two roots
  *         e_ManyRoot - infinite number of roots
  *
- *         The function code looks like this:
- * \code
- *   RootNumber SolvEquation  (float a, float b, float c, float* x1_ptr, float* x2_ptr)
- *   {
- *       assert (x1_ptr);
- *       assert (x2_ptr);
- *       assert (x1_ptr != x2_ptr);
- *
- *       if (CompFloat (a, 0) == e_AreEqual) return  SolvLine   (b, c, x1_ptr);
- *       else                                return  SolvSquare (a, b, c, x1_ptr, x2_ptr);
- *   }
- * \endcode
- *
  * @note If a is equal to zero, the equation is considered linear
  */
 
@@ -223,36 +213,6 @@ RootNumber SolvEquation  (float a, float b, float c, float* x1_ptr, float* x2_pt
  *
  * @return true if all coefficients were successfully entered
  * @return false if an input error occurred
-
- *         The function code looks like this:
- * \code
-           bool InputValues (float* a, float* b, float* c)
-            {
-                assert (a);
-                assert (b);
-                assert (c);
-
-                if (InputWithColorComment ("Enter the coefficient a before x^2\n", a, WhiteColor) == false)
-                    {
-                        PrintfColor ("Input Error\n", RedColor);
-                        return false;
-                    }
-
-                if (InputWithColorComment ("Enter the coefficient b before x\n",   b, BlueColor) ==  false)
-                    {
-                        PrintfColor ("Input Error\n", RedColor);
-                        return false;
-                    }
-
-                if (InputWithColorComment ("Enter the coefficient c\n",            c, RedColor) ==   false)
-                    {
-                        PrintfColor ("Input Error\n", RedColor);
-                        return false;
-                    }
-
-                return true;
-            }
- * \endcode
  *
  * @note Each input prompt is displayed using a specified console color
  */
@@ -289,40 +249,14 @@ bool InputValues (float* a, float* b, float* c)
 /**
  * @brief Displays the result of solving the equation
  *
- * @param [in] NumberRoots          Number of roots
+ * @param [in] NumberRoots Number of roots
  * @param [in] x1          First root
  * @param [in] x2          Second root
  * @param [in] TextColor   Color used to display descriptive text
  * @param [in] AnswerColor Color used to display the roots
  *
- *         The function code looks like this:
- * \code
-           void PrintValues (int NumberRoots , float x1, float x2, int TextColor, int AnswerColor)
-            {
-                switch(NumberRoots )
-                    {
-                        case e_ZeroRoot: PrintfColor            ("There are no solutions\n",                           TextColor);
-                                        break;
-
-                        case e_OneRoot:  PrintfColor            ("The equation has a unique solution\n",               TextColor);
-                                        PrintfColorOneArgument  ("x = %.3f\n",  x1,                                    AnswerColor);
-                                        break;
-
-                        case e_TwoRoot:  PrintfColorOneArgument ("x1 = %.3f\n", x1,                                    AnswerColor);
-                                        PrintfColorOneArgument  ("x2 = %.3f\n", x2,                                    AnswerColor);
-                                        break;
-
-                        case e_ManyRoot: PrintfColor            ("The equation has an infinite number of solutions\n", TextColor);
-                                        break;
-
-                        default:         PrintfColor            ("Error\n",                                            TextColor);
-                                        break;
-                    }
-            }
-  * \endcode
-  *
-  * @note The output depends on the number of roots descriptive messages and numerical answers can have different colors
-  */
+ * @note The output depends on the number of roots descriptive messages and numerical answers can have different colors
+ */
 
 void PrintValues (RootNumber NumberRoots , float x1, float x2, int TextColor, int AnswerColor)
     {
@@ -361,27 +295,6 @@ void PrintValues (RootNumber NumberRoots , float x1, float x2, int TextColor, in
  *         e_OneRoot  - one root
  *         e_ManyRoot - infinite number of roots
  *
- *         The function code looks like this:
- * \code
-           RootNumber SolvLine (float b, float c, float* x1_ptr)
-            {
-                assert (x1_ptr);
-
-                if (CompFloat (b, 0) == e_AreEqual)
-                    {
-                        if (CompFloat (c, 0) == e_AreEqual) return e_ManyRoot;
-                        else                                return e_ZeroRoot;
-                    }
-                else
-                    {
-                        *x1_ptr = (-c) / (b);
-
-                        return e_OneRoot;
-                    }
-
-            }
- * \endcode
- *
  * @note If b and c are both equal to zero, the equation has an infinite number of roots
  */
 
@@ -418,38 +331,6 @@ RootNumber SolvLine (float b, float c, float* x1_ptr)
  *         e_ZeroRoot - no roots
  *         e_OneRoot  - one root
  *         e_TwoRoot  - two roots
- *
- *         The function code looks like this:
- * \code
-           RootNumber SolvSquare (float a, float b, float c, float* x1_ptr, float* x2_ptr)
-            {
-                assert (x1_ptr);
-                assert (x2_ptr);
-                assert (x1_ptr != x2_ptr);
-
-                float discriminant = b * b - 4 * a * c;
-
-                if (CompFloat (0, discriminant) == e_AreMore) return e_ZeroRoot;
-                else
-                    {
-                        float discriminantsq = sqrt(discriminant);
-
-                        if (CompFloat (discriminant, 0) == e_AreEqual)
-                            {
-                                *x1_ptr = *x2_ptr = (-b) / (2 * a);
-
-                                return e_OneRoot;
-                            }
-                        else
-                            {
-                                *x1_ptr = (-b + discriminantsq) / (2 * a);
-                                *x2_ptr = (-b - discriminantsq) / (2 * a);
-
-                                return e_TwoRoot;
-                            }
-                    }
-            }
- * \endcode
  *
  * @note The discriminant is used to determine the number of roots floating-point values are compared using the EPS precision
  */
@@ -495,20 +376,6 @@ RootNumber SolvSquare (float a, float b, float c, float* x1_ptr, float* x2_ptr)
  * @return true if a floating-point value was successfully read
  * @return false if the input was invalid
  *
- *         The function code looks like this:
- * \code
-           bool InputWithColorComment (const char* String, float* InputNumber, int Color)
-            {
-                assert (String);
-                assert (InputNumber);
-
-                PrintfColor (String,Color);
-
-                if (scanf ("%f", InputNumber) == IsANumber) return true;
-                else                                        return false;
-            }
- * \endcode
- *
  * @note The specified color is applied only to the input prompt, the console color is restored after the prompt is displayed
  */
 
@@ -534,24 +401,14 @@ bool InputWithColorComment (const char* String, float* InputNumber, int Color)
  * @return e_AreLess  if FirstNumber is less than SecondNumber
  * @return e_AreEqual if the numbers are equal within EPS precision
  *
- *         The function code looks like this:
- * \code
-           CompIndicators CompFloat (float FirstNumber, float SecondNumber)
-            {
-                if (fabs (FirstNumber - SecondNumber) < EPS) return e_AreEqual;
-                else if (FirstNumber + EPS < SecondNumber)   return e_AreLess;
-                else                                         return e_AreMore;
-            }
- * \endcode
- *
  * @note The EPS (epsilon) value was calculated based on the selected float data type, if desired, you can change it in the constants section
  */
 
 CompIndicators CompFloat (float FirstNumber, float SecondNumber)
     {
-        if (fabs (FirstNumber - SecondNumber) < EPS) return e_AreEqual;
-        else if (FirstNumber + EPS < SecondNumber)   return e_AreLess;
-        else                                         return e_AreMore;
+        if      (fabs (FirstNumber - SecondNumber) < EPS) return e_AreEqual;
+        else if (FirstNumber + EPS < SecondNumber)        return e_AreLess;
+        else                                              return e_AreMore;
     }
 
 //----------------------------------------------------------------
@@ -564,18 +421,6 @@ CompIndicators CompFloat (float FirstNumber, float SecondNumber)
  * @param [in] b      Coefficient before x
  * @param [in] c      Free coefficient
  * @param [in] Color  Console color used to display the equation
- *
- *         The function code looks like this:
- * \code
-           void PrintfColorArgument (const char* String, float a, float b, float c, int Color)
-            {
-                assert (String);
-
-                txSetConsoleAttr (Color);
-                printf (String, a, b, c);
-                txSetConsoleAttr (LightGrayColor);
-            }
- * \endcode
  *
  * @note The console color is restored after the equation is displayed
  */
@@ -597,18 +442,6 @@ void PrintfColorArgument (const char* String, float a, float b, float c, int Col
  * @param [in] String Text to display
  * @param [in] Color  Console color used to display the text
  *
- *         The function code looks like this:
- * \code
-           void PrintfColor (const char* String, int Color)
-            {
-                assert (String);
-
-                txSetConsoleAttr (Color);
-                printf (String);
-                txSetConsoleAttr (LightGrayColor);
-            }
- * \endcode
- *
  * @note The console color is restored after the text is displayed
  */
 
@@ -629,30 +462,6 @@ void PrintfColor (const char* String, int Color)
  *
  * @param [in] FileName Name of the text file containing the ASCII image
  * @param [in] Color    Console color used to display the ASCII image
- *
- *                      The function code looks like this:
- * \code
-           void PrintASCII (const char* FileName, int Color)
-            {
-                assert(FileName);
-
-                FILE* File = fopen (FileName, "r");
-
-
-                txSetConsoleAttr (Color);
-
-                char String[256] = {};
-
-                while (fgets (String, sizeof (String), File) != NULL)
-                    {
-                        printf ("%s", String);
-                    }
-
-                txSetConsoleAttr (LightGrayColor);
-
-                fclose (File);
-            }
- * \endcode
  *
  * @note The function reads the file line by line and displays its contents
  *       using the specified console color
@@ -690,6 +499,15 @@ bool PrintASCII (const char* FileName, int Color)
 
 //----------------------------------------------------------------
 
+/**
+ * @brief Displays information about a failed test with one expected root
+ *
+ * @param [in] test Test case containing the expected root
+ * @param [in] x1 First root received from the equation solver
+ *
+ * @note The function displays the expected and received values of the root
+ */
+
 bool RunOneTest (TestSquare  test)
     {
         float x1 = 0, x2 = 0;
@@ -711,12 +529,12 @@ bool RunOneTest (TestSquare  test)
 
                         case e_OneRoot:     if ((CompFloat(x1, test.x1Ref) != e_AreEqual))
                                                 {
-                                                    TestFailOneRoot (test, x1);
+                                                    PrintTestFailOneRoot (test, x1);
                                                     return TestFailed;
                                                 }
                                             break;
 
-                        case e_TwoRoot:     TestFailTwoRoot (test, x1, x2, Roots);
+                        case e_TwoRoot:     PrintTestFailTwoRoot (test, x1, x2, Roots);
                                             return TestFailed;
                                             break;
 
@@ -738,9 +556,18 @@ bool RunOneTest (TestSquare  test)
 
 //----------------------------------------------------------------
 
+/**
+ * @brief Runs all prepared test cases
+ *
+ * @return TestPassed after all test cases have been executed
+ *
+ * @note Test cases are stored in an array of TestSquare structures
+ *       Each test case is passed to the RunOneTest function
+ */
+
 int RunAllTest (void)
     {
-        TestSquare testsAll[10] = { {.a = 1,  .b =  2,  .c =  1, .RootsRef = e_OneRoot, .x1Ref = -1},
+        TestSquare testsAll[] = {   {.a = 1,  .b =  2,  .c =  1, .RootsRef = e_OneRoot, .x1Ref = -1},
                                     {.a = 1,  .b = -3,  .c =  2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref =  1},
                                     {.a = 1,  .b =  0,  .c = -4, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -2},
                                     {.a = 1,  .b =  0,  .c =  1, .RootsRef = e_ZeroRoot},
@@ -760,20 +587,40 @@ int RunAllTest (void)
 
 //----------------------------------------------------------------
 
-void TestFailOneRoot (TestSquare  test, float x1)
+/**
+ * @brief Displays information about a failed test with one expected root
+ *
+ * @param [in] test Test case containing the expected root
+ * @param [in] x1 First root received from the equation solver
+ *
+ * @note The function displays the expected and received values of the root
+ */
+
+void PrintTestFailOneRoot (TestSquare  test, float x1)
         {
             PrintfColor         ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
-            PrintfColorArgument ("Expected: x1 = %f\n", test.x1Ref, 0, 0, BlueColor);
-            PrintfColorArgument ("Received: x1 = %f\n", x1, 0, 0, YellowColor);
+            PrintfColorArgument ("Expected: x1 = %f\n", test.x1Ref, 0, 0,                             BlueColor);
+            PrintfColorArgument ("Received: x1 = %f\n", x1,         0, 0,                             YellowColor);
         }
 
 //----------------------------------------------------------------
 
-void TestFailTwoRoot (TestSquare  test, float x1, float x2, int Roots)
+/**
+ * @brief Displays information about a failed test with two expected roots
+ *
+ * @param [in] test Test case containing the expected roots
+ * @param [in] x1 First root received from the equation solver
+ * @param [in] x2 Second root received from the equation solver
+ * @param [in] Roots Number of roots received from the equation solver
+ *
+ * @note The function displays the expected and received number of roots and their values
+ */
+
+void PrintTestFailTwoRoot (TestSquare  test, float x1, float x2, int Roots)
     {
-        PrintfColor         ("Test Fail: The roots of the test and the solution did not match\n", RedColor);
+        PrintfColor         ("Test Fail: The roots of the test and the solution did not match\n",                    RedColor);
         PrintfColorArgument ("Expected: %d roots; x1 = %f; x2 = %f\n", (float)test.RootsRef, test.x1Ref, test.x2Ref, YellowColor);
-        PrintfColorArgument ("Received: %d roots; x1 = %f; x2 = %f\n", (float)Roots, x1, x2, BlueColor);
+        PrintfColorArgument ("Received: %d roots; x1 = %f; x2 = %f\n", (float)Roots,              x1,         x2,    BlueColor);
     }
 
 //----------------------------------------------------------------
