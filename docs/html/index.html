@@ -136,9 +136,11 @@ Features</h1>
 <li>Displaying the equation and the solution using different colors</li>
 <li>Output of ASCII art from a document.txt</li>
 <li>Checking the user's login and password</li>
+<li>Registering new users</li>
+<li>Checking whether a username already exists</li>
 <li>Hashing passwords using the FNV-1a algorithm</li>
-<li>Reading user credentials and ASCII image names from a file</li>
-<li>Displaying an ASCII image of the authorized user</li>
+<li>Reading and writing user data to a file</li>
+<li>Displaying the ASCII image of the authorized user</li>
 <li>Testing the equation solver using predefined test cases</li>
 <li>Checking the number and values of calculated roots</li>
 <li>Displaying information about failed tests</li>
@@ -152,9 +154,9 @@ Program Structure</h1>
 <li><a class="el" href="_q_e_s_8c.html#a43598d1a086925b5534016f0189330d3" title="SolvSquare">SolvSquare</a> - solves quadratic equations</li>
 <li><a class="el" href="_q_e_s_8c.html#a2d9a4123dce946bc413e3d79080430e0" title="CompFloat">CompFloat</a> - compares floating-point numbers</li>
 <li><a class="el" href="_q_e_s_8c.html#a83c497b034c7d18157550ce1224b8388" title="InputValues">InputValues</a> - reads the equation coefficients</li>
-<li><a class="el" href="_q_e_s_8c.html#a68865f7a8eed64ce98d077420758652a" title="InputWithColorComment">InputWithColorComment</a> - reads a floating-point value with a colored prompt</li>
+<li>InputWithCommentColor - reads a floating-point value with a colored prompt</li>
 <li><a class="el" href="_q_e_s_8c.html#aa7c7b9886cdc2852409f3e09270a397d" title="PrintValues">PrintValues</a> - displays the solution</li>
-<li><a class="el" href="_q_e_s_8c.html#afb18cab6dc5dbc456373d2f8e375950f" title="PrintfColorArgument">PrintfColorArgument</a> - displays the equation using a specified color</li>
+<li>PrintfColorTreeArgument - displays the equation using a specified color</li>
 <li><a class="el" href="_q_e_s_8c.html#abe47204e50f41e2d2092352c9794c058" title="PrintfColor">PrintfColor</a> - displays a string using a specified color</li>
 <li><a class="el" href="_q_e_s_8c.html#a0527b15c45d2c587dfcf1e662f9abe65" title="PrintASCII">PrintASCII</a> - displays an ASCII image from a text file</li>
 <li><a class="el" href="_q_e_s_8c.html#a4ad260542b1742b6678d2198d6a89c35" title="RunOneTest">RunOneTest</a> - runs and checks one test case</li>
@@ -162,7 +164,9 @@ Program Structure</h1>
 <li><a class="el" href="_q_e_s_8c.html#a97ce30390d6de5aa49c1ed3ae5ea2c62" title="PrintTestFailOneRoot">PrintTestFailOneRoot</a> - displays information about a failed one-root test</li>
 <li><a class="el" href="_q_e_s_8c.html#aaeba89d7e2541faa4c74b3b1a87f06bf" title="PrintTestFailTwoRoot">PrintTestFailTwoRoot</a> - displays information about a failed two-root test</li>
 <li><a class="el" href="_q_e_s_8c.html#a245d88d115669fec1c042d0a94c23b81" title="fnv32_hash">fnv32_hash</a> - calculates the FNV-1a hash of a string</li>
-<li><a class="el" href="_q_e_s_8c.html#ac7b6eca7c101894728afe922fb67e82c" title="CheckLoginPassword">CheckLoginPassword</a> - checks the entered login and password and displays the user's ASCII image</li>
+<li><a class="el" href="_q_e_s_8c.html#ac7b6eca7c101894728afe922fb67e82c" title="CheckLoginPassword">CheckLoginPassword</a> - checks the user's login and password and displays the user's ASCII image</li>
+<li><a class="el" href="_q_e_s_8c.html#aa3902f8cb247b802af988c4f4593fcd6" title="IsLoginExists">IsLoginExists</a> - checks whether a username already exists in the user database</li>
+<li><a class="el" href="_q_e_s_8c.html#a34fa8ccb177f9a0df815fd29647c0c5a" title="Registration">Registration</a> - registers a new user and saves their data to the user database</li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="precision"></a>
 Floating-Point Precision</h1>

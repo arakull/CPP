@@ -176,9 +176,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a83c497b034c7d18157550ce1224b8388" id="r_a83c497b034c7d18157550ce1224b8388"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a83c497b034c7d18157550ce1224b8388">InputValues</a> (float *a, float *b, float *c)</td></tr>
 <tr class="memdesc:a83c497b034c7d18157550ce1224b8388"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all equation coefficients from the user.  <br /></td></tr>
 <tr class="memitem:ac7b6eca7c101894728afe922fb67e82c" id="r_ac7b6eca7c101894728afe922fb67e82c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac7b6eca7c101894728afe922fb67e82c">CheckLoginPassword</a> (int TextColor, int PictureColor, const char *FileName)</td></tr>
-<tr class="memdesc:ac7b6eca7c101894728afe922fb67e82c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the user's login and password and displays the ASCII art of the authorized user.  <br /></td></tr>
+<tr class="memdesc:ac7b6eca7c101894728afe922fb67e82c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks the user's login and password and displays the corresponding ASCII image.  <br /></td></tr>
 <tr class="memitem:a2d9a4123dce946bc413e3d79080430e0" id="r_a2d9a4123dce946bc413e3d79080430e0"><td class="memItemLeft"><a class="el" href="#a96327838e54fa47b6e47d27e2af9b400">CompIndicators</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2d9a4123dce946bc413e3d79080430e0">CompFloat</a> (float FirstNumber, float SecondNumber)</td></tr>
 <tr class="memdesc:a2d9a4123dce946bc413e3d79080430e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two floating-point numbers with EPS precision.  <br /></td></tr>
+<tr class="memitem:a34fa8ccb177f9a0df815fd29647c0c5a" id="r_a34fa8ccb177f9a0df815fd29647c0c5a"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a34fa8ccb177f9a0df815fd29647c0c5a">Registration</a> (int TextColor, const char *FileName)</td></tr>
+<tr class="memdesc:a34fa8ccb177f9a0df815fd29647c0c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new user and adds their data to the user database.  <br /></td></tr>
+<tr class="memitem:aa3902f8cb247b802af988c4f4593fcd6" id="r_aa3902f8cb247b802af988c4f4593fcd6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa3902f8cb247b802af988c4f4593fcd6">IsLoginExists</a> (const char *Login, const char *FileName)</td></tr>
+<tr class="memdesc:aa3902f8cb247b802af988c4f4593fcd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a username already exists in the user database.  <br /></td></tr>
 <tr class="memitem:a245d88d115669fec1c042d0a94c23b81" id="r_a245d88d115669fec1c042d0a94c23b81"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a245d88d115669fec1c042d0a94c23b81">fnv32_hash</a> (const char *str, size_t len)</td></tr>
 <tr class="memdesc:a245d88d115669fec1c042d0a94c23b81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the 32-bit FNV-1a hash of a string.  <br /></td></tr>
 <tr class="memitem:abe47204e50f41e2d2092352c9794c058" id="r_abe47204e50f41e2d2092352c9794c058"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abe47204e50f41e2d2092352c9794c058">PrintfColor</a> (const char *String, int Color)</td></tr>
@@ -201,10 +205,11 @@ Variables</h2></td></tr>
 <tr class="memitem:a7c8450cc8496f94e8902a8a004bb4f6c" id="r_a7c8450cc8496f94e8902a8a004bb4f6c"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c8450cc8496f94e8902a8a004bb4f6c">TestPassed</a> = false</td></tr>
 <tr class="memitem:afc84a1edd71db8cc63c99221a57c4a88" id="r_afc84a1edd71db8cc63c99221a57c4a88"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#afc84a1edd71db8cc63c99221a57c4a88">TestFailed</a> = true</td></tr>
 <tr class="memitem:a361fd36739decab31cd5fa20a1af6532" id="r_a361fd36739decab31cd5fa20a1af6532"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#a361fd36739decab31cd5fa20a1af6532">Right</a> = true</td></tr>
-<tr class="memitem:af6652c896f39ddb233b61d95ec36828f" id="r_af6652c896f39ddb233b61d95ec36828f"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#af6652c896f39ddb233b61d95ec36828f">Incorrect</a> = true</td></tr>
+<tr class="memitem:af6652c896f39ddb233b61d95ec36828f" id="r_af6652c896f39ddb233b61d95ec36828f"><td class="memItemLeft">const bool&#160;</td><td class="memItemRight"><a class="el" href="#af6652c896f39ddb233b61d95ec36828f">Incorrect</a> = false</td></tr>
 <tr class="memitem:a743ced80ad6a7072874a1dfa2b1e7cd3" id="r_a743ced80ad6a7072874a1dfa2b1e7cd3"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a743ced80ad6a7072874a1dfa2b1e7cd3">MaxLenLogin</a> = 50</td></tr>
 <tr class="memitem:abcc4107676d74d7ede7eb4dcc0069ce8" id="r_abcc4107676d74d7ede7eb4dcc0069ce8"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#abcc4107676d74d7ede7eb4dcc0069ce8">MaxLenPassword</a> = 50</td></tr>
 <tr class="memitem:a57a9f2991809591ec980b440d467de78" id="r_a57a9f2991809591ec980b440d467de78"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a57a9f2991809591ec980b440d467de78">MaxPhotoFileName</a> = 100</td></tr>
+<tr class="memitem:a6355424cbf0ecbefe4734a2f168133ad" id="r_a6355424cbf0ecbefe4734a2f168133ad"><td class="memItemLeft">const int&#160;</td><td class="memItemRight"><a class="el" href="#a6355424cbf0ecbefe4734a2f168133ad">MaxLenAnswer</a> = 50</td></tr>
 </table>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
 <a id="a27e3a449691086bc3aa87f47c4e46c80" name="a27e3a449691086bc3aa87f47c4e46c80"></a>
@@ -482,23 +487,27 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Checks the user's login and password and displays the ASCII art of the authorized user. </p>
+<p>Checks the user's login and password and displays the corresponding ASCII image. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">TextColor</td><td>Color used to display authorization text </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">PictureColor</td><td>Color used to display the ASCII art </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the file containing user credentials</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">TextColor</td><td>Color used to display authorization messages </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">PictureColor</td><td>Color used to display the ASCII image </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the file containing user login, password hash and photo file name</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the login and password are correct or authorization is skipped </dd>
+<dl class="section return"><dt>Returns</dt><dd>true if the user enters correct login and password or chooses None </dd>
 <dd>
-false if the login or password is incorrect or the file cannot be opened</dd></dl>
+false if an error occurs while working with the authorization file</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The entered password is converted to an FNV-1a hash before comparison</dd>
 <dd>
 If the user enters None as the login, the authorization process is skipped</dd>
 <dd>
-If the login and password are correct, the corresponding user's ASCII art is displayed </dd></dl>
+If the user enters Registration as the login, the registration function is called</dd>
+<dd>
+If the login or password is incorrect, the user can try again</dd>
+<dd>
+After successful authorization, the ASCII image associated with the user is displayed </dd></dl>
 
 </div>
 </div>
@@ -648,6 +657,42 @@ false if an input error occurred</dd></dl>
 <dd>
 false if the input was invalid</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The specified color is applied only to the input prompt, the console color is restored after the prompt is displayed </dd></dl>
+
+</div>
+</div>
+<a id="aa3902f8cb247b802af988c4f4593fcd6" name="aa3902f8cb247b802af988c4f4593fcd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3902f8cb247b802af988c4f4593fcd6">&#9670;&#160;</a></span>IsLoginExists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool IsLoginExists </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>Login</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>FileName</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether a username already exists in the user database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">Login</td><td>Username to search for </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the file containing registered users</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the username already exists </dd>
+<dd>
+false if the username was not found or the file could not be opened</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The function reads the user database without modifying its contents</dd>
+<dd>
+The function is used during registration to prevent duplicate usernames </dd></dl>
 
 </div>
 </div>
@@ -904,6 +949,50 @@ The console color is restored after the image is displayed </dd></dl>
 
 </div>
 </div>
+<a id="a34fa8ccb177f9a0df815fd29647c0c5a" name="a34fa8ccb177f9a0df815fd29647c0c5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fa8ccb177f9a0df815fd29647c0c5a">&#9670;&#160;</a></span>Registration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Registration </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>TextColor</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>FileName</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Registers a new user and adds their data to the user database. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">TextColor</td><td>Color used to display registration messages </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">FileName</td><td>Name of the file where the new user's data is stored</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the registration is completed successfully or cancelled by entering None </dd>
+<dd>
+false if an error occurs while writing to the user database</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The function checks whether the entered username is already in use</dd>
+<dd>
+The entered password is converted to an FNV-1a hash before being saved</dd>
+<dd>
+The user must confirm the entered registration data before it is written to the file</dd>
+<dd>
+Entering No allows the user to enter the registration data again</dd>
+<dd>
+Entering None cancels the registration process</dd>
+<dd>
+User data is appended to the end of the database file without deleting existing users </dd></dl>
+
+</div>
+</div>
 <a id="a5d89eb354a5e5ba93b5b21880a872f6e" name="a5d89eb354a5e5ba93b5b21880a872f6e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d89eb354a5e5ba93b5b21880a872f6e">&#9670;&#160;</a></span>RunAllTest()</h2>
 
@@ -1112,7 +1201,7 @@ The console color is restored after the image is displayed </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const bool Incorrect = true</td>
+          <td class="memname">const bool Incorrect = false</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1141,6 +1230,20 @@ The console color is restored after the image is displayed </dd></dl>
       <table class="memname">
         <tr>
           <td class="memname">const int LEN = 256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6355424cbf0ecbefe4734a2f168133ad" name="a6355424cbf0ecbefe4734a2f168133ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6355424cbf0ecbefe4734a2f168133ad">&#9670;&#160;</a></span>MaxLenAnswer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MaxLenAnswer = 50</td>
         </tr>
       </table>
 </div><div class="memdoc">

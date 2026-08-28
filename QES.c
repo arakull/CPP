@@ -45,9 +45,11 @@
  * - Displaying the equation and the solution using different colors
  * - Output of ASCII art from a document.txt
  * - Checking the user's login and password
+ * - Registering new users
+ * - Checking whether a username already exists
  * - Hashing passwords using the FNV-1a algorithm
- * - Reading user credentials and ASCII image names from a file
- * - Displaying an ASCII image of the authorized user
+ * - Reading and writing user data to a file
+ * - Displaying the ASCII image of the authorized user
  * - Testing the equation solver using predefined test cases
  * - Checking the number and values of calculated roots
  * - Displaying information about failed tests
@@ -56,14 +58,14 @@
  *
  * The program is divided into several functions:
  *
- * - @ref SolvEquation  - determines the type of equation
+ * - @ref SolvEquation - determines the type of equation
  * - @ref SolvLine - solves linear equations
  * - @ref SolvSquare - solves quadratic equations
  * - @ref CompFloat - compares floating-point numbers
  * - @ref InputValues - reads the equation coefficients
- * - @ref InputWithColorComment - reads a floating-point value with a colored prompt
+ * - @ref InputWithCommentColor - reads a floating-point value with a colored prompt
  * - @ref PrintValues - displays the solution
- * - @ref PrintfColorArgument - displays the equation using a specified color
+ * - @ref PrintfColorTreeArgument - displays the equation using a specified color
  * - @ref PrintfColor - displays a string using a specified color
  * - @ref PrintASCII - displays an ASCII image from a text file
  * - @ref RunOneTest - runs and checks one test case
@@ -71,7 +73,9 @@
  * - @ref PrintTestFailOneRoot - displays information about a failed one-root test
  * - @ref PrintTestFailTwoRoot - displays information about a failed two-root test
  * - @ref fnv32_hash - calculates the FNV-1a hash of a string
- * - @ref CheckLoginPassword - checks the entered login and password and displays the user's ASCII image
+ * - @ref CheckLoginPassword - checks the user's login and password and displays the user's ASCII image
+ * - @ref IsLoginExists - checks whether a username already exists in the user database
+ * - @ref Registration - registers a new user and saves their data to the user database
  *
  * @section precision Floating-Point Precision
  *
@@ -148,6 +152,8 @@ bool           InputWithColorComment (const char* String,      float*      Input
 bool           InputValues           (float*      a,           float*      b,            float*      c);
 bool           CheckLoginPassword    (int         TextColor,   int         PictureColor, const char* FileName);
 CompIndicators CompFloat             (float       FirstNumber, float       SecondNumber);
+bool           Registration          (int         TextColor,   const char* FileName);
+bool           IsLoginExists         (const char* Login,       const char* FileName);
 uint32_t       fnv32_hash            (const char *str,         size_t      len);
 void           PrintfColor           (const char* String,      int         Color);
 bool           PrintASCII            (const char* FileName,    int         Color);
@@ -163,10 +169,11 @@ const int    LEN         = 256;
 const bool   TestPassed  = false;
 const bool   TestFailed  = true;
 const bool   Right       = true;
-const bool   Incorrect   = true;
+const bool   Incorrect   = false;
 const int    MaxLenLogin = 50;
 const int    MaxLenPassword = 50;
 const int    MaxPhotoFileName = 100;
+const int    MaxLenAnswer = 50;
 
 //----------------------------------------------------------------
 
@@ -677,57 +684,70 @@ uint32_t fnv32_hash(const char *str, size_t len)
 //----------------------------------------------------------------
 
 /**
- * @brief Checks the user's login and password and displays the ASCII art of the authorized user
+ * @brief Checks the user's login and password and displays the corresponding ASCII image
  *
- * @param [in] TextColor Color used to display authorization text
- * @param [in] PictureColor Color used to display the ASCII art
- * @param [in] FileName Name of the file containing user credentials
+ * @param [in] TextColor Color used to display authorization messages
+ * @param [in] PictureColor Color used to display the ASCII image
+ * @param [in] FileName Name of the file containing user login, password hash and photo file name
  *
- * @return true if the login and password are correct or authorization is skipped
- * @return false if the login or password is incorrect or the file cannot be opened
+ * @return true if the user enters correct login and password or chooses None
+ * @return false if an error occurs while working with the authorization file
  *
  * @note The entered password is converted to an FNV-1a hash before comparison
  *
  * @note If the user enters None as the login, the authorization process is skipped
  *
- * @note If the login and password are correct, the corresponding user's ASCII art is displayed
+ * @note If the user enters Registration as the login, the registration function is called
+ *
+ * @note If the login or password is incorrect, the user can try again
+ *
+ * @note After successful authorization, the ASCII image associated with the user is displayed
  */
 
 bool CheckLoginPassword (int TextColor, int PictureColor, const char* FileName)
     {
-        assert(FileName);
+        assert (FileName);
 
-        char login[MaxLenLogin] = {};
-        char password[MaxLenPassword] = {};
+        while (Right)
+        {
+            char login[MaxLenLogin] = {};
+            char password[MaxLenPassword] = {};
 
-        PrintfColor ("Enter your login (Enter None to skip): \n", TextColor);
+            PrintfColor ("Enter your login (Enter None to skip; to register, enter Registration): \n", TextColor);
 
-        scanf("%s", login);
+            scanf ("%s", login);
 
-        if (strcmp (login, "None") == 0) return Right;
+            if (strcmp (login, "None") == 0) return Right;
 
+            if (strcmp (login, "Registration") == 0)
+                {
+                    Registration (TextColor, FileName);
 
-        PrintfColor ("Enter your password: \n", TextColor);
+                    continue;
+                }
 
-        scanf("%s", password);
+            PrintfColor ("Enter your password: \n", TextColor);
 
-        uint32_t passwordHash = fnv32_hash (password, strlen (password));
+            scanf ("%s", password);
 
-        FILE* File = fopen (FileName, "r");
+            uint32_t passwordHash = fnv32_hash (password, strlen (password));
 
-        if (File == NULL)
-            {
-                PrintfColor ("Input Error File\n", RedColor);
-                return Incorrect;
-            }
+            FILE* File = fopen (FileName, "r");
 
-        char fileLogin[MaxLenLogin] = {};
-        uint32_t filePasswordHash = 0;
-        char photoFileName[MaxPhotoFileName] = {};
+            if (File == NULL)
+                {
+                    PrintfColor ("Input Error File\n", RedColor);
 
-        while (fscanf (File, "%s %u %s", fileLogin, &filePasswordHash, photoFileName) == 3)
-            {
-                if (strcmp (login, fileLogin) == 0 && passwordHash == filePasswordHash)
+                    return Incorrect;
+                }
+
+            char fileLogin[MaxLenLogin] = {};
+            uint32_t filePasswordHash = 0;
+            char photoFileName[MaxPhotoFileName] = {};
+
+            while (fscanf (File, "%s %u %s", fileLogin,&filePasswordHash, photoFileName) == 3)
+                {
+                    if (strcmp (login, fileLogin) == 0 && passwordHash == filePasswordHash)
                     {
                         fclose (File);
 
@@ -735,11 +755,164 @@ bool CheckLoginPassword (int TextColor, int PictureColor, const char* FileName)
 
                         return Right;
                     }
+                }
+
+            fclose (File);
+
+            PrintfColor ("Wrong login or password\n", RedColor);
+        }
+
+        return Incorrect;
+    }
+
+//----------------------------------------------------------------
+
+/**
+ * @brief Registers a new user and adds their data to the user database
+ *
+ * @param [in] TextColor Color used to display registration messages
+ * @param [in] FileName Name of the file where the new user's data is stored
+ *
+ * @return true if the registration is completed successfully or cancelled by entering None
+ * @return false if an error occurs while writing to the user database
+ *
+ * @note The function checks whether the entered username is already in use
+ *
+ * @note The entered password is converted to an FNV-1a hash before being saved
+ *
+ * @note The user must confirm the entered registration data before it is written to the file
+ *
+ * @note Entering No allows the user to enter the registration data again
+ *
+ * @note Entering None cancels the registration process
+ *
+ * @note User data is appended to the end of the database file without deleting existing users
+ */
+
+
+bool Registration (int TextColor, const char* FileName)
+    {
+        assert (FileName);
+
+        while (Right)
+        {
+            char login[MaxLenLogin] = {};
+            char password[MaxLenPassword] = {};
+            char photoFileName[MaxPhotoFileName] = {};
+            char answer[MaxLenAnswer] = {};
+
+            PrintfColor ("Enter new login (Enter None to cancel registration): \n", TextColor);
+
+            scanf ("%s", login);
+
+            if (strcmp (login, "None") == 0) return Right;
+
+            if (IsLoginExists (login, FileName) == Right)
+                {
+                    PrintfColor ("This username is busy, enter another one\n", RedColor);
+
+                    continue;
+                }
+
+            PrintfColor ("Enter new password (Enter None to cancel registration): \n", TextColor);
+
+            scanf ("%s", password);
+
+            if (strcmp (password, "None") == 0) return Right;
+
+            PrintfColor ("Enter photo file name (FileName.txt) (Enter None to cancel registration): \n", TextColor);
+
+            scanf ("%s", photoFileName);
+
+            if (strcmp (photoFileName, "None") == 0) return Right;
+
+            while (Right)
+            {
+                PrintfColor ("Is the username and password entered correctly? (Yes/No, None to cancel): \n",
+                             TextColor);
+
+                scanf ("%s", answer);
+
+                if (strcmp (answer, "Yes") == 0)
+                    break;
+
+                if (strcmp (answer, "No") == 0)
+                    break;
+
+                if (strcmp (answer, "None") == 0)
+                    return Right;
+
+                PrintfColor ("Please enter Yes or No\n", RedColor);
             }
 
-    fclose (File);
+            if (strcmp (answer, "No") == 0)
+                continue;
 
-    PrintfColor ("Wrong login or password\n", RedColor);
+            uint32_t passwordHash = fnv32_hash (password, strlen (password));
 
-    return Incorrect;
+            FILE* File = fopen (FileName, "a");
+
+            if (File == NULL)
+                {
+                    PrintfColor ("Input Error File\n", RedColor);
+
+                    return Incorrect;
+                }
+
+            fprintf (File, "%s %u %s\n", login, passwordHash, photoFileName);
+
+            fclose (File);
+
+            PrintfColor ("Registration successful\n", GreenColor);
+
+            return Right;
+        }
+
+        return Incorrect;
     }
+
+//----------------------------------------------------------------
+
+/**
+ * @brief Checks whether a username already exists in the user database
+ *
+ * @param [in] Login Username to search for
+ * @param [in] FileName Name of the file containing registered users
+ *
+ * @return true if the username already exists
+ * @return false if the username was not found or the file could not be opened
+ *
+ * @note The function reads the user database without modifying its contents
+ *
+ * @note The function is used during registration to prevent duplicate usernames
+ */
+
+bool IsLoginExists (const char* Login, const char* FileName)
+    {
+        assert (Login);
+        assert (FileName);
+
+        FILE* File = fopen (FileName, "r");
+
+        if (File == NULL) return Incorrect;
+
+        char fileLogin[MaxLenLogin] = {};
+        uint32_t filePasswordHash = 0;
+        char photoFileName[MaxPhotoFileName] = {};
+
+        while (fscanf (File, "%s %u %s", fileLogin, &filePasswordHash, photoFileName) == 3)
+            {
+                if (strcmp (Login, fileLogin) == 0)
+                    {
+                        fclose (File);
+
+                        return Right;
+                    }
+            }
+
+        fclose (File);
+
+        return Incorrect;
+    }
+
+//----------------------------------------------------------------
