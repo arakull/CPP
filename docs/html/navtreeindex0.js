@@ -81,8 +81,5 @@ var NAVTREEINDEX0 =
 "struct_test_square.html#a83fc1af92e29717b4513d121b0c72c7d":[1,0,0,1],
 "struct_test_square.html#a9ffcb272de85c1153ac0b9a85232c835":[1,0,0,3],
 "struct_test_square.html#ac66f7f9ecd8b68156af396e134e5d73f":[1,0,0,5],
-"struct_test_square.html#ae78103ab33f03590e84ff7bc735629d7":[1,0,0,2],
-"test_8c.html":[2,0,0,1],
-"test_8c.html#a245d88d115669fec1c042d0a94c23b81":[2,0,0,1,0],
-"test_8c.html#a840291bc02cba5474a4cb46a9b9566fe":[2,0,0,1,1]
+"struct_test_square.html#ae78103ab33f03590e84ff7bc735629d7":[1,0,0,2]
 };

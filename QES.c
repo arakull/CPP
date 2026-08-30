@@ -11,7 +11,7 @@
 /*!
 	\brief Library
 	\author ZDA
-	\version 1.0
+	\version 1.1
 	\date   August 2026 (Summer School)
 	\warning This library was created for educational purposes only
 
@@ -51,7 +51,6 @@
  * - Reading and writing user data to a file
  * - Displaying the ASCII image of the authorized user
  * - Testing the equation solver using predefined test cases
- * - Checking the number and values of calculated roots
  * - Displaying information about failed tests
  *
  * @section structure Program Structure
@@ -63,9 +62,9 @@
  * - @ref SolvSquare - solves quadratic equations
  * - @ref CompFloat - compares floating-point numbers
  * - @ref InputValues - reads the equation coefficients
- * - @ref InputWithCommentColor - reads a floating-point value with a colored prompt
+ * - @ref InputWithColorComment - reads a floating-point value with a colored prompt
  * - @ref PrintValues - displays the solution
- * - @ref PrintfColorTreeArgument - displays the equation using a specified color
+ * - @ref PrintfColorArgument - displays the equation using a specified color
  * - @ref PrintfColor - displays a string using a specified color
  * - @ref PrintASCII - displays an ASCII image from a text file
  * - @ref RunOneTest - runs and checks one test case
@@ -111,6 +110,7 @@
 #define LightMagentaColor 0xD
 #define YellowColor       0xE
 #define WhiteColor        0xF
+
 
 /** @} */
 
@@ -602,7 +602,7 @@ int RunAllTest (void)
                                     {.a = 1,  .b = -5,  .c =  6, .RootsRef = e_TwoRoot, .x1Ref =  3, .x2Ref =  2},
                                     {.a = 1,  .b =  1,  .c = -6, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -3},
                                     {.a = 1,  .b = -1,  .c = -2, .RootsRef = e_TwoRoot, .x1Ref =  2, .x2Ref = -1},
-                                  };
+                                };
 
         int size = sizeof(testsAll) / sizeof(TestSquare);
         for (int  i = 0; i < size; i++) RunOneTest (testsAll[i]);
@@ -828,25 +828,20 @@ bool Registration (int TextColor, const char* FileName)
 
             while (Right)
             {
-                PrintfColor ("Is the username and password entered correctly? (Yes/No, None to cancel): \n",
-                             TextColor);
+                PrintfColor ("Is the username and password entered correctly? (Yes/No, None to cancel): \n", TextColor);
 
                 scanf ("%s", answer);
 
-                if (strcmp (answer, "Yes") == 0)
-                    break;
+                if (strcmp (answer, "Yes") == 0) break;
 
-                if (strcmp (answer, "No") == 0)
-                    break;
+                if (strcmp (answer, "No") == 0) break;
 
-                if (strcmp (answer, "None") == 0)
-                    return Right;
+                if (strcmp (answer, "None") == 0) return Right;
 
                 PrintfColor ("Please enter Yes or No\n", RedColor);
             }
 
-            if (strcmp (answer, "No") == 0)
-                continue;
+            if (strcmp (answer, "No") == 0) continue;
 
             uint32_t passwordHash = fnv32_hash (password, strlen (password));
 
