@@ -1,6 +1,6 @@
-Quadratic Equation Solver
+# Quadratic Equation Solver
 
-Ordinary Library
+## Ordinary Library
 
 Author: ZDA
 Version: 1.1
@@ -15,7 +15,7 @@ ax² + bx + c = 0
 
 The program determines the type of equation, finds the number of roots, and calculates their values when they exist.
 
-Features
+### Features
 
 - Solving quadratic equations
 - Solving linear equations
@@ -37,7 +37,7 @@ Features
 - Testing the equation solver using predefined test cases
 - Displaying information about failed tests
 
-Project Structure
+### Project Structure
 
 The program is divided into several functions:
 
