@@ -41,25 +41,25 @@ Project Structure
 
 The program is divided into several functions:
 
-Function| Description
-"SolvEquation"| Determines the type of equation
-"SolvLine"| Solves linear equations
-"SolvSquare"| Solves quadratic equations
-"CompFloat"| Compares floating-point numbers
-"InputValues"| Reads equation coefficients
-"InputWithColorComment"| Reads a floating-point value with a colored prompt
-"PrintValues"| Displays the solution
-"PrintfColorArgument"| Displays the equation using a specified color
-"PrintfColor"| Displays a string using a specified color
-"PrintASCII"| Displays an ASCII image from a text file
-"RunOneTest"| Runs and checks one test case
-"RunAllTest"| Runs all predefined test cases
-"PrintTestFailOneRoot"| Displays information about a failed one-root test
-"PrintTestFailTwoRoot"| Displays information about a failed two-root test
-"fnv32_hash"| Calculates the FNV-1a hash of a string
-"CheckLoginPassword"| Checks the user's login and password and displays the user's ASCII image
-"IsLoginExists"| Checks whether a username already exists in the user database
-"Registration"| Registers a new user and saves their data to the user database
+Function Description
+- SolvEquation - Determines the type of equation
+- SolvLine - Solves linear equations
+- SolvSquare" - Solves quadratic equations
+- CompFloat - Compares floating-point numbers
+- InputValues - Reads equation coefficients
+- InputWithColorComment - Reads a floating-point value with a colored prompt
+- PrintValues - Displays the solution
+- PrintfColorArgument - Displays the equation using a specified color
+- PrintfColor - Displays a string using a specified color
+- PrintASCII - Displays an ASCII image from a text file
+- RunOneTest - Runs and checks one test case
+- RunAllTest - Runs all predefined test cases
+- PrintTestFailOneRoot - Displays information about a failed one-root test
+- PrintTestFailTwoRoot - Displays information about a failed two-root test
+- fnv32_hash - Calculates the FNV-1a hash of a string
+- CheckLoginPassword - Checks the user's login and password and displays the user's ASCII image
+- IsLoginExists - Checks whether a username already exists in the user database
+- Registration - Registers a new user and saves their data to the user database
 
 Floating-Point Precision
 
