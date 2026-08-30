@@ -67,7 +67,7 @@ Floating-point numbers are compared using the EPS (epsilon) constant.
 
 This helps reduce errors caused by the limited precision of floating-point arithmetic.
 
-Console Output
+### Console Output
 
 The TXLib library is used to change the color of text displayed in the console.
 
@@ -77,7 +77,7 @@ User Authentication
 
 The program includes a simple user authentication system.
 
-It supports:
+### It supports:
 
 - User registration
 - Login and password verification
@@ -88,7 +88,7 @@ It supports:
 
 The authentication system is implemented for educational purposes and should not be considered secure for real-world applications.
 
-Testing
+### Testing
 
 The equation solver includes predefined test cases.
 
